@@ -34,7 +34,7 @@
 #define __OSCBufferSend(osc, buffer, i, result) memset(buffer + i, 0, __OSCGet32BitAlignedLength(i) - i); \
                                                 result = OSCSend(osc, buffer, __OSCGet32BitAlignedLength(i));
 
-#pragma Internal string helper for fast UTF8 buffer access
+#pragma mark Internal string helper for fast UTF8 buffer access
 
 typedef struct {
   CFAllocatorRef allocator;
@@ -49,7 +49,7 @@ const char     *__OSCUTF8StringGetBuffer(__OSCUTF8String utf8String);
 CFIndex         __OSCUTF8StringGetMaximumSize(__OSCUTF8String utf8String);
 void            __OSCUTF8StringDestroy(__OSCUTF8String utf8String);
 
-#pragma Internal, diagnostics
+#pragma mark Internal, diagnostics
 
 void    __OSCBufferPrint(char *buffer, int length);
 
@@ -82,13 +82,19 @@ typedef struct OSC {
 
 typedef OSC *OSCRef;
 
+#pragma mark OSC API
+
 OSCRef    OSCCreate                      (CFAllocatorRef allocator, CFStringRef host, CFStringRef port);
 OSCRef    OSCRelease                     (OSCRef osc);
+
+#pragma mark Addresses
 
 bool      OSCAddressesIsIndexInBounds    (OSCRef osc, CFIndex index);
 bool      OSCAddressesIsIndexOutOfBounds (OSCRef osc, CFIndex index);
 CFIndex   OSCAddressesAppendWithString   (OSCRef osc, CFStringRef string);
 void      OSCAddressesClear              (OSCRef osc);
+
+#pragma mark Sending
 
 OSCResult OSCSend        (OSCRef osc, const void *buffer, CFIndex length);
 OSCResult OSCSendTrue    (OSCRef osc, CFIndex index);

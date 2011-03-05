@@ -1,14 +1,14 @@
 //
-//  CoreOSC.c
-//  CoreOSC
+// CoreOSC.c
+// CoreOSC Framework
 //
-//  Created by Mirek Rusin on 05/03/2011.
-//  Copyright 2011 Inteliv Ltd. All rights reserved.
+// Created by Mirek Rusin on 05/03/2011.
+// Copyright 2011 Inteliv Ltd. All rights reserved.
 //
 
 #include "CoreOSC.h"
 
-#pragma Internal string helper for fast UTF8 buffer access
+#pragma mark Internal string helper for fast UTF8 buffer access
 
 inline __OSCUTF8String __OSCUTF8StringMake(CFAllocatorRef allocator, CFStringRef string) {
   __OSCUTF8String utf8String;
@@ -39,7 +39,7 @@ inline void __OSCUTF8StringDestroy(__OSCUTF8String utf8String) {
     CFAllocatorDeallocate(utf8String.allocator, (void *)utf8String.buffer);
 }
 
-#pragma Internal, diagnostics
+#pragma mark Internal, diagnostics
 
 // Internal, for diagnostics, print osc buffer where the top line are chars,
 // bottom one hex codes:
@@ -59,7 +59,7 @@ void __OSCBufferPrint(char *buffer, int length) {
   printf("\n");
 }
 
-#pragma OSC API
+#pragma mark OSC API
 
 inline OSCRef OSCCreate(CFAllocatorRef allocator, CFStringRef host, CFStringRef port) {
   OSCRef osc = CFAllocatorAllocate(allocator, sizeof(OSC), 0);
@@ -128,8 +128,7 @@ inline OSCRef OSCRelease(OSCRef osc) {
   return osc;
 }
 
-#pragma Addresses
-#pragma -
+#pragma mark Addresses
 
 inline bool OSCAddressesIsIndexInBounds(OSCRef osc, CFIndex index) {
   return index >= 0 && index < osc->addressesIndex;
@@ -154,8 +153,7 @@ inline void OSCAddressesClear(OSCRef osc) {
     CFAllocatorDeallocate(osc->allocator, osc->addresses[osc->addressesIndex].buffer);
 }
 
-#pragma Sending
-#pragma -
+#pragma mark Sending
 
 inline OSCResult OSCSend(OSCRef osc, const void *buffer, CFIndex length) {
   OSCResult result = kOSCResultNotAllocatedError;
