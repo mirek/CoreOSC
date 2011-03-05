@@ -1,0 +1,3 @@
+[submodule "CoreOSCTests/TestAllocator"]
+	path = CoreOSCTests/TestAllocator
+	url = git://github.com/mirek/TestAllocator.git

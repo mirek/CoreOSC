@@ -1,0 +1,423 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EB52D20C1321C20D00B396DA /* CoreOSC.c in Sources */ = {isa = PBXBuildFile; fileRef = EB52D20A1321C20D00B396DA /* CoreOSC.c */; };
+		EB52D2151322BA2600B396DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB52D2141322BA2600B396DA /* Cocoa.framework */; };
+		EB52D21F1322BA2700B396DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB52D21D1322BA2600B396DA /* InfoPlist.strings */; };
+		EB52D2221322BA2700B396DA /* CoreOSCTests.h in Resources */ = {isa = PBXBuildFile; fileRef = EB52D2211322BA2700B396DA /* CoreOSCTests.h */; };
+		EB52D2241322BA2700B396DA /* CoreOSCTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EB52D2231322BA2700B396DA /* CoreOSCTests.m */; };
+		EB52D2671322BAA200B396DA /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = EB52D24E1322BAA200B396DA /* Readme.md */; };
+		EB52D2681322BAA200B396DA /* TestAllocator.c in Sources */ = {isa = PBXBuildFile; fileRef = EB52D24F1322BAA200B396DA /* TestAllocator.c */; };
+		EB52D2691322BB8700B396DA /* CoreOSC.c in Sources */ = {isa = PBXBuildFile; fileRef = EB52D20A1321C20D00B396DA /* CoreOSC.c */; };
+		EBCA29C01321281200361057 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCA29BF1321281200361057 /* CoreFoundation.framework */; };
+		EBCA29C31321281200361057 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EBCA29C21321281200361057 /* main.c */; };
+		EBCA29CB13212C4800361057 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCA29CA13212C4800361057 /* CoreServices.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		EBCA29B91321281200361057 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		EB52D20A1321C20D00B396DA /* CoreOSC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreOSC.c; sourceTree = "<group>"; };
+		EB52D20B1321C20D00B396DA /* CoreOSC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreOSC.h; sourceTree = "<group>"; };
+		EB52D2131322BA2600B396DA /* CoreOSCTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreOSCTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB52D2141322BA2600B396DA /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		EB52D2171322BA2600B396DA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		EB52D2181322BA2600B396DA /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		EB52D2191322BA2600B396DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EB52D21C1322BA2600B396DA /* CoreOSCTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreOSCTests-Info.plist"; sourceTree = "<group>"; };
+		EB52D21E1322BA2600B396DA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EB52D2201322BA2700B396DA /* CoreOSCTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreOSCTests-Prefix.pch"; sourceTree = "<group>"; };
+		EB52D2211322BA2700B396DA /* CoreOSCTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CoreOSCTests.h; sourceTree = "<group>"; };
+		EB52D2231322BA2700B396DA /* CoreOSCTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CoreOSCTests.m; sourceTree = "<group>"; };
+		EB52D24E1322BAA200B396DA /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.md; sourceTree = "<group>"; };
+		EB52D24F1322BAA200B396DA /* TestAllocator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TestAllocator.c; sourceTree = "<group>"; };
+		EB52D2501322BAA200B396DA /* TestAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestAllocator.h; sourceTree = "<group>"; };
+		EBCA29BB1321281200361057 /* CoreOSC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CoreOSC; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBCA29BF1321281200361057 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		EBCA29C21321281200361057 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		EBCA29C41321281200361057 /* CoreOSC.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CoreOSC.1; sourceTree = "<group>"; };
+		EBCA29CA13212C4800361057 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = System/Library/Frameworks/CoreServices.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EB52D20F1322BA2600B396DA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB52D2151322BA2600B396DA /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBCA29B81321281200361057 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBCA29CB13212C4800361057 /* CoreServices.framework in Frameworks */,
+				EBCA29C01321281200361057 /* CoreFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EB52D21A1322BA2600B396DA /* CoreOSCTests */ = {
+			isa = PBXGroup;
+			children = (
+				EB52D2211322BA2700B396DA /* CoreOSCTests.h */,
+				EB52D2231322BA2700B396DA /* CoreOSCTests.m */,
+				EB52D21B1322BA2600B396DA /* Supporting Files */,
+			);
+			path = CoreOSCTests;
+			sourceTree = "<group>";
+		};
+		EB52D21B1322BA2600B396DA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB52D2281322BAA200B396DA /* TestAllocator */,
+				EB52D21C1322BA2600B396DA /* CoreOSCTests-Info.plist */,
+				EB52D21D1322BA2600B396DA /* InfoPlist.strings */,
+				EB52D2201322BA2700B396DA /* CoreOSCTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		EB52D2281322BAA200B396DA /* TestAllocator */ = {
+			isa = PBXGroup;
+			children = (
+				EB52D24E1322BAA200B396DA /* Readme.md */,
+				EB52D2501322BAA200B396DA /* TestAllocator.h */,
+				EB52D24F1322BAA200B396DA /* TestAllocator.c */,
+			);
+			path = TestAllocator;
+			sourceTree = "<group>";
+		};
+		EBCA29B01321281200361057 = {
+			isa = PBXGroup;
+			children = (
+				EBCA29C11321281200361057 /* CoreOSC */,
+				EB52D21A1322BA2600B396DA /* CoreOSCTests */,
+				EBCA29BE1321281200361057 /* Frameworks */,
+				EBCA29BC1321281200361057 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EBCA29BC1321281200361057 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EBCA29BB1321281200361057 /* CoreOSC */,
+				EB52D2131322BA2600B396DA /* CoreOSCTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EBCA29BE1321281200361057 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EBCA29CD13212F1400361057 /* OSX */,
+				EBCA29CC13212C5800361057 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EBCA29C11321281200361057 /* CoreOSC */ = {
+			isa = PBXGroup;
+			children = (
+				EB52D20B1321C20D00B396DA /* CoreOSC.h */,
+				EB52D20A1321C20D00B396DA /* CoreOSC.c */,
+				EBCA29C21321281200361057 /* main.c */,
+				EBCA29C41321281200361057 /* CoreOSC.1 */,
+			);
+			path = CoreOSC;
+			sourceTree = "<group>";
+		};
+		EBCA29CC13212C5800361057 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		EBCA29CD13212F1400361057 /* OSX */ = {
+			isa = PBXGroup;
+			children = (
+				EB52D2171322BA2600B396DA /* AppKit.framework */,
+				EB52D2181322BA2600B396DA /* CoreData.framework */,
+				EB52D2191322BA2600B396DA /* Foundation.framework */,
+				EB52D2141322BA2600B396DA /* Cocoa.framework */,
+				EBCA29CA13212C4800361057 /* CoreServices.framework */,
+				EBCA29BF1321281200361057 /* CoreFoundation.framework */,
+			);
+			name = OSX;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EB52D2121322BA2600B396DA /* CoreOSCTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB52D2251322BA2700B396DA /* Build configuration list for PBXNativeTarget "CoreOSCTests" */;
+			buildPhases = (
+				EB52D20E1322BA2600B396DA /* Sources */,
+				EB52D20F1322BA2600B396DA /* Frameworks */,
+				EB52D2101322BA2600B396DA /* Resources */,
+				EB52D2111322BA2600B396DA /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoreOSCTests;
+			productName = CoreOSCTests;
+			productReference = EB52D2131322BA2600B396DA /* CoreOSCTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+		EBCA29BA1321281200361057 /* CoreOSC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EBCA29C71321281200361057 /* Build configuration list for PBXNativeTarget "CoreOSC" */;
+			buildPhases = (
+				EBCA29B71321281200361057 /* Sources */,
+				EBCA29B81321281200361057 /* Frameworks */,
+				EBCA29B91321281200361057 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoreOSC;
+			productName = CoreOSC;
+			productReference = EBCA29BB1321281200361057 /* CoreOSC */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EBCA29B21321281200361057 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = "Inteliv Ltd";
+			};
+			buildConfigurationList = EBCA29B51321281200361057 /* Build configuration list for PBXProject "CoreOSC" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = EBCA29B01321281200361057;
+			productRefGroup = EBCA29BC1321281200361057 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EBCA29BA1321281200361057 /* CoreOSC */,
+				EB52D2121322BA2600B396DA /* CoreOSCTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EB52D2101322BA2600B396DA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB52D21F1322BA2700B396DA /* InfoPlist.strings in Resources */,
+				EB52D2221322BA2700B396DA /* CoreOSCTests.h in Resources */,
+				EB52D2671322BAA200B396DA /* Readme.md in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		EB52D2111322BA2600B396DA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EB52D20E1322BA2600B396DA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB52D2241322BA2700B396DA /* CoreOSCTests.m in Sources */,
+				EB52D2681322BAA200B396DA /* TestAllocator.c in Sources */,
+				EB52D2691322BB8700B396DA /* CoreOSC.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBCA29B71321281200361057 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBCA29C31321281200361057 /* main.c in Sources */,
+				EB52D20C1321C20D00B396DA /* CoreOSC.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		EB52D21D1322BA2600B396DA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB52D21E1322BA2600B396DA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EB52D2261322BA2700B396DA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreOSCTests/CoreOSCTests-Prefix.pch";
+				INFOPLIST_FILE = "CoreOSCTests/CoreOSCTests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		EB52D2271322BA2700B396DA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreOSCTests/CoreOSCTests-Prefix.pch";
+				INFOPLIST_FILE = "CoreOSCTests/CoreOSCTests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					SenTestingKit,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		EBCA29C51321281200361057 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		EBCA29C61321281200361057 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		EBCA29C81321281200361057 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		EBCA29C91321281200361057 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EB52D2251322BA2700B396DA /* Build configuration list for PBXNativeTarget "CoreOSCTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB52D2261322BA2700B396DA /* Debug */,
+				EB52D2271322BA2700B396DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		EBCA29B51321281200361057 /* Build configuration list for PBXProject "CoreOSC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EBCA29C51321281200361057 /* Debug */,
+				EBCA29C61321281200361057 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EBCA29C71321281200361057 /* Build configuration list for PBXNativeTarget "CoreOSC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EBCA29C81321281200361057 /* Debug */,
+				EBCA29C91321281200361057 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EBCA29B21321281200361057 /* Project object */;
+}
