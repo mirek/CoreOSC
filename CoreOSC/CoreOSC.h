@@ -7,7 +7,13 @@
 //
 
 #include <CoreFoundation/CoreFoundation.h>
+
+#if (TARGET_OS_EMBEDDED)
+#include <CFNetwork/CFNetwork.h>
+#else
 #include <CoreServices/CoreServices.h>
+#endif
+
 #include <unistd.h>
 #include <netdb.h>
 

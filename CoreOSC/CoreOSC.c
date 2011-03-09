@@ -266,7 +266,7 @@ inline OSCResult OSCSetNumberAsFloat32(OSCRef osc, CFStringRef name, CFNumberRef
       if (CFNumberIsFloatType(value)) {
         result = OSCSetValue(osc, name, value);
       } else {
-        Float32 value_ = 0.0;
+        Float32 value_ = (Float32)0.0;
         CFNumberGetValue(value, kCFNumberFloat32Type, &value_);
         CFNumberRef number = CFNumberCreate(osc->allocator, kCFNumberFloat32Type, &value_);
         result = OSCSetValue(osc, name, number);
@@ -283,7 +283,7 @@ inline OSCResult OSCSendValue(OSCRef osc, CFStringRef name, CFTypeRef value) {
     CFTypeID valueId = CFGetTypeID(value);
     if (valueId == CFNumberGetTypeID()) {
       if (CFNumberIsFloatType(value)) {
-        Float32 float32Value = 0.0;
+        Float32 float32Value = (Float32)0.0;
         CFNumberGetValue(value, kCFNumberFloat32Type, &float32Value);
         result = OSCSendFloat32(osc, name, float32Value);
       } else {

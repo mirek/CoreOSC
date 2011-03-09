@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EB4CE77E1327F3680090FED3 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB4CE77D1327F3680090FED3 /* Cocoa.framework */; };
+		EB4CE7881327F3680090FED3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB4CE7861327F3680090FED3 /* InfoPlist.strings */; };
+		EB4CE78D1327F38B0090FED3 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCA29CA13212C4800361057 /* CoreServices.framework */; };
+		EB4CE78E1327F3900090FED3 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCA29BF1321281200361057 /* CoreFoundation.framework */; };
+		EB4CE78F1327F3970090FED3 /* CoreOSC.c in Sources */ = {isa = PBXBuildFile; fileRef = EB52D20A1321C20D00B396DA /* CoreOSC.c */; };
+		EB4CE7901327F39D0090FED3 /* CoreOSC.h in Headers */ = {isa = PBXBuildFile; fileRef = EB52D20B1321C20D00B396DA /* CoreOSC.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EB52D20C1321C20D00B396DA /* CoreOSC.c in Sources */ = {isa = PBXBuildFile; fileRef = EB52D20A1321C20D00B396DA /* CoreOSC.c */; };
 		EB52D2151322BA2600B396DA /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB52D2141322BA2600B396DA /* Cocoa.framework */; };
 		EB52D21F1322BA2700B396DA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EB52D21D1322BA2600B396DA /* InfoPlist.strings */; };
@@ -15,6 +21,10 @@
 		EB52D2671322BAA200B396DA /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = EB52D24E1322BAA200B396DA /* Readme.md */; };
 		EB52D2681322BAA200B396DA /* TestAllocator.c in Sources */ = {isa = PBXBuildFile; fileRef = EB52D24F1322BAA200B396DA /* TestAllocator.c */; };
 		EB52D2691322BB8700B396DA /* CoreOSC.c in Sources */ = {isa = PBXBuildFile; fileRef = EB52D20A1321C20D00B396DA /* CoreOSC.c */; };
+		EBA03D601327F45B0073E672 /* CoreOSC.c in Sources */ = {isa = PBXBuildFile; fileRef = EB52D20A1321C20D00B396DA /* CoreOSC.c */; };
+		EBA03D611327F45D0073E672 /* CoreOSC.h in Headers */ = {isa = PBXBuildFile; fileRef = EB52D20B1321C20D00B396DA /* CoreOSC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		EBA03D631327F47C0073E672 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBA03D621327F47C0073E672 /* CoreFoundation.framework */; };
+		EBA03D651327F4830073E672 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBA03D641327F4830073E672 /* CFNetwork.framework */; };
 		EBCA29C01321281200361057 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCA29BF1321281200361057 /* CoreFoundation.framework */; };
 		EBCA29C31321281200361057 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = EBCA29C21321281200361057 /* main.c */; };
 		EBCA29CB13212C4800361057 /* CoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCA29CA13212C4800361057 /* CoreServices.framework */; };
@@ -33,6 +43,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EB4CE77C1327F3680090FED3 /* CoreOSC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CoreOSC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB4CE77D1327F3680090FED3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		EB4CE7801327F3680090FED3 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		EB4CE7811327F3680090FED3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		EB4CE7821327F3680090FED3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		EB4CE7851327F3680090FED3 /* CoreOSC-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CoreOSC-Info.plist"; sourceTree = "<group>"; };
+		EB4CE7871327F3680090FED3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EB4CE7891327F3680090FED3 /* CoreOSC-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreOSC-Prefix.pch"; sourceTree = "<group>"; };
 		EB52D20A1321C20D00B396DA /* CoreOSC.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = CoreOSC.c; sourceTree = "<group>"; };
 		EB52D20B1321C20D00B396DA /* CoreOSC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreOSC.h; sourceTree = "<group>"; };
 		EB52D2131322BA2600B396DA /* CoreOSCTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreOSCTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -48,7 +66,11 @@
 		EB52D24E1322BAA200B396DA /* Readme.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Readme.md; sourceTree = "<group>"; };
 		EB52D24F1322BAA200B396DA /* TestAllocator.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = TestAllocator.c; sourceTree = "<group>"; };
 		EB52D2501322BAA200B396DA /* TestAllocator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestAllocator.h; sourceTree = "<group>"; };
-		EBCA29BB1321281200361057 /* CoreOSC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CoreOSC; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBA03D571327F44C0073E672 /* libCoreOSC_iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCoreOSC_iOS.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBA03D5C1327F44C0073E672 /* CoreOSC_iOS-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CoreOSC_iOS-Prefix.pch"; sourceTree = "<group>"; };
+		EBA03D621327F47C0073E672 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CoreFoundation.framework; sourceTree = DEVELOPER_DIR; };
+		EBA03D641327F4830073E672 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS4.3.sdk/System/Library/Frameworks/CFNetwork.framework; sourceTree = DEVELOPER_DIR; };
+		EBCA29BB1321281200361057 /* CoreOSC */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = CoreOSC; path = CoreOSCConsole; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBCA29BF1321281200361057 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		EBCA29C21321281200361057 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		EBCA29C41321281200361057 /* CoreOSC.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = CoreOSC.1; sourceTree = "<group>"; };
@@ -56,11 +78,30 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		EB4CE7781327F3680090FED3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB4CE78E1327F3900090FED3 /* CoreFoundation.framework in Frameworks */,
+				EB4CE78D1327F38B0090FED3 /* CoreServices.framework in Frameworks */,
+				EB4CE77E1327F3680090FED3 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB52D20F1322BA2600B396DA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				EB52D2151322BA2600B396DA /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBA03D541327F44C0073E672 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBA03D651327F4830073E672 /* CFNetwork.framework in Frameworks */,
+				EBA03D631327F47C0073E672 /* CoreFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,6 +117,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EB4CE7831327F3680090FED3 /* CoreOSC */ = {
+			isa = PBXGroup;
+			children = (
+				EB4CE7841327F3680090FED3 /* Supporting Files */,
+			);
+			path = CoreOSC;
+			sourceTree = "<group>";
+		};
+		EB4CE7841327F3680090FED3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EB4CE7851327F3680090FED3 /* CoreOSC-Info.plist */,
+				EB4CE7861327F3680090FED3 /* InfoPlist.strings */,
+				EB4CE7891327F3680090FED3 /* CoreOSC-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		EB52D21A1322BA2600B396DA /* CoreOSCTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,11 +166,29 @@
 			path = TestAllocator;
 			sourceTree = "<group>";
 		};
+		EBA03D5A1327F44C0073E672 /* CoreOSC_iOS */ = {
+			isa = PBXGroup;
+			children = (
+				EBA03D5B1327F44C0073E672 /* Supporting Files */,
+			);
+			path = CoreOSC_iOS;
+			sourceTree = "<group>";
+		};
+		EBA03D5B1327F44C0073E672 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				EBA03D5C1327F44C0073E672 /* CoreOSC_iOS-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		EBCA29B01321281200361057 = {
 			isa = PBXGroup;
 			children = (
 				EBCA29C11321281200361057 /* CoreOSC */,
 				EB52D21A1322BA2600B396DA /* CoreOSCTests */,
+				EB4CE7831327F3680090FED3 /* CoreOSC */,
+				EBA03D5A1327F44C0073E672 /* CoreOSC_iOS */,
 				EBCA29BE1321281200361057 /* Frameworks */,
 				EBCA29BC1321281200361057 /* Products */,
 			);
@@ -122,6 +199,8 @@
 			children = (
 				EBCA29BB1321281200361057 /* CoreOSC */,
 				EB52D2131322BA2600B396DA /* CoreOSCTests.octest */,
+				EB4CE77C1327F3680090FED3 /* CoreOSC.framework */,
+				EBA03D571327F44C0073E672 /* libCoreOSC_iOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,6 +228,8 @@
 		EBCA29CC13212C5800361057 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				EBA03D641327F4830073E672 /* CFNetwork.framework */,
+				EBA03D621327F47C0073E672 /* CoreFoundation.framework */,
 			);
 			name = iOS;
 			sourceTree = "<group>";
@@ -156,6 +237,10 @@
 		EBCA29CD13212F1400361057 /* OSX */ = {
 			isa = PBXGroup;
 			children = (
+				EB4CE7801327F3680090FED3 /* AppKit.framework */,
+				EB4CE7811327F3680090FED3 /* CoreData.framework */,
+				EB4CE7821327F3680090FED3 /* Foundation.framework */,
+				EB4CE77D1327F3680090FED3 /* Cocoa.framework */,
 				EB52D2171322BA2600B396DA /* AppKit.framework */,
 				EB52D2181322BA2600B396DA /* CoreData.framework */,
 				EB52D2191322BA2600B396DA /* Foundation.framework */,
@@ -168,7 +253,44 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		EB4CE7791327F3680090FED3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB4CE7901327F39D0090FED3 /* CoreOSC.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBA03D551327F44C0073E672 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBA03D611327F45D0073E672 /* CoreOSC.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		EB4CE77B1327F3680090FED3 /* CoreOSC */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB4CE78A1327F3680090FED3 /* Build configuration list for PBXNativeTarget "CoreOSC" */;
+			buildPhases = (
+				EB4CE7771327F3680090FED3 /* Sources */,
+				EB4CE7781327F3680090FED3 /* Frameworks */,
+				EB4CE7791327F3680090FED3 /* Headers */,
+				EB4CE77A1327F3680090FED3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoreOSC;
+			productName = CoreOSC;
+			productReference = EB4CE77C1327F3680090FED3 /* CoreOSC.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		EB52D2121322BA2600B396DA /* CoreOSCTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = EB52D2251322BA2700B396DA /* Build configuration list for PBXNativeTarget "CoreOSCTests" */;
@@ -187,9 +309,26 @@
 			productReference = EB52D2131322BA2600B396DA /* CoreOSCTests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
-		EBCA29BA1321281200361057 /* CoreOSC */ = {
+		EBA03D561327F44C0073E672 /* CoreOSC_iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EBCA29C71321281200361057 /* Build configuration list for PBXNativeTarget "CoreOSC" */;
+			buildConfigurationList = EBA03D5D1327F44C0073E672 /* Build configuration list for PBXNativeTarget "CoreOSC_iOS" */;
+			buildPhases = (
+				EBA03D531327F44C0073E672 /* Sources */,
+				EBA03D541327F44C0073E672 /* Frameworks */,
+				EBA03D551327F44C0073E672 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CoreOSC_iOS;
+			productName = CoreOSC_iOS;
+			productReference = EBA03D571327F44C0073E672 /* libCoreOSC_iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		EBCA29BA1321281200361057 /* CoreOSCConsole */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EBCA29C71321281200361057 /* Build configuration list for PBXNativeTarget "CoreOSCConsole" */;
 			buildPhases = (
 				EBCA29B71321281200361057 /* Sources */,
 				EBCA29B81321281200361057 /* Frameworks */,
@@ -199,7 +338,7 @@
 			);
 			dependencies = (
 			);
-			name = CoreOSC;
+			name = CoreOSCConsole;
 			productName = CoreOSC;
 			productReference = EBCA29BB1321281200361057 /* CoreOSC */;
 			productType = "com.apple.product-type.tool";
@@ -224,13 +363,23 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EBCA29BA1321281200361057 /* CoreOSC */,
+				EBCA29BA1321281200361057 /* CoreOSCConsole */,
 				EB52D2121322BA2600B396DA /* CoreOSCTests */,
+				EB4CE77B1327F3680090FED3 /* CoreOSC */,
+				EBA03D561327F44C0073E672 /* CoreOSC_iOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		EB4CE77A1327F3680090FED3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB4CE7881327F3680090FED3 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB52D2101322BA2600B396DA /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -260,6 +409,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		EB4CE7771327F3680090FED3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EB4CE78F1327F3970090FED3 /* CoreOSC.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		EB52D20E1322BA2600B396DA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -267,6 +424,14 @@
 				EB52D2241322BA2700B396DA /* CoreOSCTests.m in Sources */,
 				EB52D2681322BAA200B396DA /* TestAllocator.c in Sources */,
 				EB52D2691322BB8700B396DA /* CoreOSC.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EBA03D531327F44C0073E672 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBA03D601327F45B0073E672 /* CoreOSC.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +447,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		EB4CE7861327F3680090FED3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EB4CE7871327F3680090FED3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		EB52D21D1322BA2600B396DA /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -293,6 +466,43 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		EB4CE78B1327F3680090FED3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreOSC/CoreOSC-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INFOPLIST_FILE = "CoreOSC/CoreOSC-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Debug;
+		};
+		EB4CE78C1327F3680090FED3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreOSC/CoreOSC-Prefix.pch";
+				INFOPLIST_FILE = "CoreOSC/CoreOSC-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = framework;
+			};
+			name = Release;
+		};
 		EB52D2261322BA2700B396DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -332,6 +542,39 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+		EBA03D5E1327F44C0073E672 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/CoreOSC_iOS.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreOSC_iOS/CoreOSC_iOS-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		EBA03D5F1327F44C0073E672 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				DSTROOT = /tmp/CoreOSC_iOS.dst;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CoreOSC_iOS/CoreOSC_iOS-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};
@@ -391,11 +634,29 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		EB4CE78A1327F3680090FED3 /* Build configuration list for PBXNativeTarget "CoreOSC" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EB4CE78B1327F3680090FED3 /* Debug */,
+				EB4CE78C1327F3680090FED3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		EB52D2251322BA2700B396DA /* Build configuration list for PBXNativeTarget "CoreOSCTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB52D2261322BA2700B396DA /* Debug */,
 				EB52D2271322BA2700B396DA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EBA03D5D1327F44C0073E672 /* Build configuration list for PBXNativeTarget "CoreOSC_iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EBA03D5E1327F44C0073E672 /* Debug */,
+				EBA03D5F1327F44C0073E672 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
@@ -408,7 +669,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EBCA29C71321281200361057 /* Build configuration list for PBXNativeTarget "CoreOSC" */ = {
+		EBCA29C71321281200361057 /* Build configuration list for PBXNativeTarget "CoreOSCConsole" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EBCA29C81321281200361057 /* Debug */,
