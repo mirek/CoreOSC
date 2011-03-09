@@ -262,14 +262,16 @@ inline OSCResult OSCSetValue(OSCRef osc, CFStringRef name, CFTypeRef value) {
 inline OSCResult OSCSetNumberAsFloat32(OSCRef osc, CFStringRef name, CFNumberRef value) {
   OSCResult result = kOSCResultNotAllocatedError;
   if (osc && name && value) {
-    if (CFNumberIsFloatType(value)) {
-      result = OSCSetValue(osc, name, value);
-    } else {
-      Float32 value_ = 0.0;
-      CFNumberGetValue(value, kCFNumberFloat32Type, &value_);
-      CFNumberRef number = CFNumberCreate(osc->allocator, kCFNumberFloat32Type, &value_);
-      result = OSCSetValue(osc, name, number);
-      CFRelease(number);
+    if (CFGetTypeID(value) == CFNumberGetTypeID()) {
+      if (CFNumberIsFloatType(value)) {
+        result = OSCSetValue(osc, name, value);
+      } else {
+        Float32 value_ = 0.0;
+        CFNumberGetValue(value, kCFNumberFloat32Type, &value_);
+        CFNumberRef number = CFNumberCreate(osc->allocator, kCFNumberFloat32Type, &value_);
+        result = OSCSetValue(osc, name, number);
+        CFRelease(number);
+      }
     }
   }
   return result;
