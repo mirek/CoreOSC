@@ -8,7 +8,7 @@
 
 #include <CoreFoundation/CoreFoundation.h>
 
-#if (TARGET_OS_EMBEDDED)
+#if (TARGET_OS_IPHONE)
 #include <CFNetwork/CFNetwork.h>
 #else
 #include <CoreServices/CoreServices.h>
@@ -16,6 +16,8 @@
 
 #include <unistd.h>
 #include <netdb.h>
+
+#define kOSCHostAny CFSTR("0.0.0.0")
 
 #define OSC_ADDRESSES_LENGTH 1024
 
@@ -58,6 +60,36 @@ const char     *__OSCUTF8StringGetBuffer(__OSCUTF8String utf8String);
 CFIndex         __OSCUTF8StringGetMaximumSize(__OSCUTF8String utf8String);
 void            __OSCUTF8StringDestroy(__OSCUTF8String utf8String);
 
+#pragma mark Bundle
+
+//typedef struct OSCBundle OSCBundle;
+//typedef OSCBundle *OSCBundleRef;
+//
+//struct OSCBundle {
+//  CFAllocatorRef allocator;
+//  CFIndex retainCount;
+//  CFMutableArrayRef elements;
+//};
+//
+//typedef struct OSCBundleElement OSCBundleElement;
+//typedef OSCBundleElement *OSCBundleElementRef;
+//
+//struct OSCBundleElement {
+//  CFAllocatorRef allocator;
+//  CFIndex retainCount;
+//  UInt32 size;
+//  CFDataRef contents;
+//};
+//
+//typedef struct OSCMessage OSCMessage;
+//typedef OSCMessage *OSCMessageRef;
+//
+//struct OSCMessage {
+//  CFAllocatorRef allocator;
+//  CFIndex retainCount;
+//  
+//};
+
 #pragma mark Internal, diagnostics
 
 void    __OSCBufferPrint(char *buffer, int length);
@@ -66,14 +98,10 @@ typedef enum OSCResult {
   kOSCResultNotAllocatedError = -1001 // OSCRef object has not been allocated?
 } OSCResult;
 
-typedef struct __OSCAddress {
-  CFIndex length;
-  void *buffer;
-} __OSCAddress;
-
 typedef struct OSC {
   CFAllocatorRef allocator;
   CFIndex retainCount;
+  void *userInfo;
   
   CFStringRef host;
   CFStringRef port;
@@ -85,9 +113,6 @@ typedef struct OSC {
   // Run loop timer on each execution will send the first value for all
   // keys.
   CFMutableDictionaryRef cache;
-  
-  CFIndex addressesIndex;
-  __OSCAddress *addresses;
   
   int sockfd;
   struct addrinfo hints;
@@ -101,20 +126,33 @@ typedef OSC *OSCRef;
 
 void __OSCBufferAppendAddressWithString  (void *buffer, CFStringRef name, int *i);
 
+#pragma mark Data related functions - packet construction
+
+void OSCDataAppendZeroBytesFor32Alignment (CFMutableDataRef data);
+void OSCDataAppendSInt32                  (CFMutableDataRef data, SInt32 value);
+void OSCDataAppendNumberAsSInt32          (CFMutableDataRef data, CFNumberRef value);
+void OSCDataAppendNumberAsFloat32         (CFMutableDataRef data, CFNumberRef value);
+void OSCDataAppendImmediateTimeTag        (CFMutableDataRef data);
+void OSCDataAppendData                    (CFMutableDataRef data, CFDataRef value);
+
+void OSCDataAppendString                  (CFAllocatorRef allocator, CFMutableDataRef data, CFStringRef value);
+void OSCDataAppendMessage                 (CFAllocatorRef allocator, CFMutableDataRef data, CFStringRef name, CFTypeRef value);
+void OSCDataAppendBundleWithDictionary    (CFAllocatorRef allocator, CFMutableDataRef data, CFDictionaryRef keyValuePairs);
+
 #pragma mark OSC API
 
 void __OSCRunLoopTimerCallBack(CFRunLoopTimerRef timer, void *info);
 
-OSCRef    OSCCreate                      (CFAllocatorRef allocator, CFStringRef host, CFStringRef port, CFTimeInterval timeInterval);
+OSCRef    OSCCreateWithUserInfo          (CFAllocatorRef allocator, void *userInfo);
 OSCRef    OSCRetain                      (OSCRef osc);
 OSCRef    OSCRelease                     (OSCRef osc);
 
+struct addrinfo *OSCConnect              (OSCRef osc, CFStringRef host, UInt16 port);
+void             OSCDisconnect           (OSCRef osc);
+
 #pragma mark Addresses
 
-bool      OSCAddressesIsIndexInBounds    (OSCRef osc, CFIndex index);
-bool      OSCAddressesIsIndexOutOfBounds (OSCRef osc, CFIndex index);
-CFIndex   OSCAddressesAppendWithString   (OSCRef osc, CFStringRef string);
-void      OSCAddressesClear              (OSCRef osc);
+CFArrayRef OSCCreateAddressArray         (OSCRef osc);
 
 void      OSCActivateRunLoopTimer        (OSCRef osc, CFTimeInterval timeInterval);
 void      OSCDeactivateRunLoopTimer      (OSCRef osc);

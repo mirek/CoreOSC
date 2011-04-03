@@ -69,6 +69,117 @@ void __OSCBufferPrint(char *buffer, int length) {
   printf("\n");
 }
 
+#pragma mark Data related functions - packet construction
+
+inline void OSCDataAppendZeroBytesFor32Alignment(CFMutableDataRef data) {
+  CFDataAppendBytes(data, (const UInt8 *)"\0\0\0", (4 - CFDataGetLength(data) % 4) % 4);
+}
+
+inline void OSCDataAppendString(CFAllocatorRef allocator, CFMutableDataRef data, CFStringRef value) {
+  CFIndex bufferLength = CFStringGetMaximumSizeForEncoding(CFStringGetLength(value), kCFStringEncodingUTF8);
+  CFIndex usedBufferLength = 0;
+  UInt8 *buffer = CFAllocatorAllocate(allocator, bufferLength, 0);
+  CFStringGetBytes(value, CFRangeMake(0, CFStringGetLength(value)), kCFStringEncodingUTF8, 0, 0, buffer, bufferLength, &usedBufferLength);
+  CFDataAppendBytes(data, buffer, usedBufferLength);
+  CFDataAppendBytes(data, (const UInt8 *)"\0", 1);
+  OSCDataAppendZeroBytesFor32Alignment(data);
+  CFAllocatorDeallocate(allocator, buffer);
+}
+
+inline void OSCDataAppendSInt32(CFMutableDataRef data, SInt32 value) {
+  uint32_t swapped = CFSwapInt32HostToBig(value);
+  CFDataAppendBytes(data, (const UInt8 *)&swapped, sizeof(uint32_t));
+}
+
+inline void OSCDataAppendNumberAsSInt32(CFMutableDataRef data, CFNumberRef value) {
+  SInt32 value_ = 0;
+  CFNumberGetValue(value, kCFNumberSInt32Type, &value_);
+  OSCDataAppendSInt32(data, value_);
+}
+
+inline void OSCDataAppendNumberAsFloat32(CFMutableDataRef data, CFNumberRef value) {
+  Float32 value_ = 0;
+  CFNumberGetValue(value, kCFNumberFloat32Type, &value_);
+  CFSwappedFloat32 swapped = CFConvertFloat32HostToSwapped(value_);
+  CFDataAppendBytes(data, (const UInt8 *)&swapped, sizeof(CFSwappedFloat32));
+}
+
+inline void OSCDataAppendMessage(CFAllocatorRef allocator, CFMutableDataRef data, CFStringRef name, CFTypeRef value) {
+  CFTypeID valueType = CFGetTypeID(value);
+  if (valueType == CFNumberGetTypeID()) {
+    if (CFNumberIsFloatType(value)) {
+      OSCDataAppendString(allocator, data, name);
+      OSCDataAppendString(allocator, data, CFSTR(",f"));
+      OSCDataAppendNumberAsFloat32(data, value);
+    } else {
+      OSCDataAppendString(allocator, data, name);
+      OSCDataAppendString(allocator, data, CFSTR(",i"));
+      OSCDataAppendNumberAsSInt32(data, value);
+    }
+  } else if (valueType == CFBooleanGetTypeID()) {
+    OSCDataAppendString(allocator, data, name);
+    if (CFBooleanGetValue(value))
+      OSCDataAppendString(allocator, data, CFSTR(",T"));
+    else
+      OSCDataAppendString(allocator, data, CFSTR(",F"));
+  } else if (valueType == CFStringGetTypeID()) {
+    OSCDataAppendString(allocator, data, name);
+    OSCDataAppendString(allocator, data, value);
+  } else if (valueType == CFDataGetTypeID()) {
+    OSCDataAppendString(allocator, data, name);
+    OSCDataAppendString(allocator, data, CFSTR(",b"));
+    OSCDataAppendSInt32(data, CFDataGetLength(value));
+    CFDataAppendBytes(data, CFDataGetBytePtr(value), CFDataGetLength(value));
+    OSCDataAppendZeroBytesFor32Alignment(data);
+  }
+}
+
+//inline void OSCDataAppendTimeTagWithAboluteTimeInterval(CFDataRef data, CFTimeInterval timeInterval) {
+//  const unsigned long long EPOCH = 2208988800ULL;
+//  const unsigned long long NTP_SCALE_FRAC = 4294967295ULL;
+//  
+//  unsigned long long tv_to_ntp(struct timeval tv)
+//  {
+//    unsigned long long tv_ntp, tv_usecs;
+//    
+//    tv_ntp = tv.tv_sec + EPOCH;
+//    tv_usecs = (NTP_SCALE_FRAC * tv.tv_usec) / 1000000UL;
+//    
+//    return (tv_ntp << 32) | tv_usecs;
+//  }
+//  
+//}
+
+inline void OSCDataAppendImmediateTimeTag(CFMutableDataRef data) {
+  uint64_t immediate = CFSwapInt64HostToBig(1);
+  CFDataAppendBytes(data, (const UInt8 *)&immediate, 8);
+}
+
+inline void OSCDataAppendData(CFMutableDataRef data, CFDataRef value) {
+  CFDataAppendBytes(data, CFDataGetBytePtr(value), CFDataGetLength(value));
+  OSCDataAppendZeroBytesFor32Alignment(data);
+}
+
+inline void OSCDataAppendBundleWithDictionary(CFAllocatorRef allocator, CFMutableDataRef data, CFDictionaryRef keyValuePairs) {
+  if (CFGetTypeID(keyValuePairs) == CFDictionaryGetTypeID()) {
+    OSCDataAppendString(allocator, data, CFSTR("#bundle"));
+    OSCDataAppendImmediateTimeTag(data);
+    CFIndex n = CFDictionaryGetCount(keyValuePairs);
+    CFTypeRef *keys = CFAllocatorAllocate(allocator, sizeof(CFTypeRef) * n, 0);
+    CFTypeRef *values = CFAllocatorAllocate(allocator, sizeof(CFTypeRef) * n, 0);
+    CFDictionaryGetKeysAndValues(keyValuePairs, keys, values);
+    for (CFIndex i = 0; i < n; i++) {
+      CFMutableDataRef message = CFDataCreateMutable(allocator, 0);
+      OSCDataAppendMessage(allocator, message, keys[i], values[i]);
+      OSCDataAppendSInt32(data, CFDataGetLength(message));
+      OSCDataAppendData(data, message);
+      CFRelease(message);
+    }
+    CFAllocatorDeallocate(allocator, values);
+    CFAllocatorDeallocate(allocator, keys);
+  }
+}
+
 #pragma mark OSC API
 
 // Iterate over all keys in the cache. Fetch first inserted value and send it.
@@ -76,6 +187,9 @@ void __OSCBufferPrint(char *buffer, int length) {
 // the only difference is how the values are being added (insert or replace).
 inline void __OSCRunLoopTimerCallBack(CFRunLoopTimerRef timer, void *info) {
   OSCRef osc = info;
+  
+  CFMutableDictionaryRef dict = CFDictionaryCreateMutable(NULL, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
+  
   if (osc) {
     if (osc->cache) {
       CFIndex n = CFDictionaryGetCount(osc->cache);
@@ -89,12 +203,14 @@ inline void __OSCRunLoopTimerCallBack(CFRunLoopTimerRef timer, void *info) {
           if (CFArrayGetCount(array) > 0) { // If there is a value in the array, remove it and send
             CFTypeRef value = CFRetain(CFArrayGetValueAtIndex(array, 0));
             CFArrayRemoveValueAtIndex(array, 0);
-//            printf("sending: ");
-//            CFShow(key);
+//            OSCSendValue(osc, key, value);
+            
+            CFDictionarySetValue(dict, key, value);
+            
+//            printf("sending");
 //            CFShow(value);
-//            printf("\n");
-            OSCSendValue(osc, key, value);
             CFRelease(value);
+//            break;
           }
         }
         CFAllocatorDeallocate(osc->allocator, arrays);
@@ -102,52 +218,32 @@ inline void __OSCRunLoopTimerCallBack(CFRunLoopTimerRef timer, void *info) {
       }
     }
   }
+  
+//  CFShow(dict);
+  
+  if (CFDictionaryGetCount(dict) > 0) {
+    CFMutableDataRef data = CFDataCreateMutable(NULL, 0);
+    OSCDataAppendBundleWithDictionary(NULL, data, dict);
+    
+    OSCSendRawBufferWithData(osc, data);
+    
+//    __OSCBufferPrint((char *)CFDataGetBytePtr(data), CFDataGetLength(data));
+  }
+  
+  CFRelease(dict);
+  
 }
 
-inline OSCRef OSCCreate(CFAllocatorRef allocator, CFStringRef host, CFStringRef port, CFTimeInterval timeInterval) {
+inline OSCRef OSCCreateWithUserInfo(CFAllocatorRef allocator, void *userInfo) {
   OSCRef osc = CFAllocatorAllocate(allocator, sizeof(OSC), 0);
   if (osc) {
     osc->allocator = allocator ? CFRetain(allocator) : NULL;
     osc->retainCount = 1;
-    osc->addressesIndex = 0;
-    osc->addresses = CFAllocatorAllocate(allocator, OSC_ADDRESSES_LENGTH, 0);
-    osc->servinfo = NULL;
+    osc->userInfo = userInfo;
+    osc->runLoopTimer = NULL;
     osc->sockfd = 0;
-
-    __OSCUTF8String utf8Host = __OSCUTF8StringMake(allocator, host);
-    __OSCUTF8String utf8Port = __OSCUTF8StringMake(allocator, port);
-    
-    memset(&osc->hints, 0, sizeof(osc->hints));
-    osc->hints.ai_family = AF_UNSPEC;
-    osc->hints.ai_socktype = SOCK_DGRAM;
-    
-    if ((osc->rv = getaddrinfo(__OSCUTF8StringGetBuffer(utf8Host), __OSCUTF8StringGetBuffer(utf8Port), &osc->hints, &osc->servinfo)) != 0) {
-      // TODO: gai_strerror(osc->rv)
-      osc = OSCRelease(osc);
-    } else {
-      
-      // Loop through all the results and make a socket
-      for (osc->p = osc->servinfo; osc->p != NULL; osc->p = osc->p->ai_next) {
-        if ((osc->sockfd = socket(osc->p->ai_family, osc->p->ai_socktype, osc->p->ai_protocol)) == -1)
-          continue;
-        break;
-      }
-      
-      if (osc)
-        if (osc->p == NULL)
-          osc = OSCRelease(osc); // TODO: Failed to bind socket
-    }
-    
-    __OSCUTF8StringDestroy(utf8Port);
-    __OSCUTF8StringDestroy(utf8Host);
-    
-    // Create the dictionary
-    if (osc)
-      osc->cache = CFDictionaryCreateMutable(osc->allocator, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
-    
-    if (osc)
-      if (timeInterval > 0.0)
-        OSCActivateRunLoopTimer(osc, timeInterval);
+    osc->p = NULL;
+    osc->cache = CFDictionaryCreateMutable(osc->allocator, 0, &kCFTypeDictionaryKeyCallBacks, &kCFTypeDictionaryValueCallBacks);
   }
   return osc;
 }
@@ -170,11 +266,6 @@ inline OSCRef OSCRelease(OSCRef osc) {
         osc->cache = NULL;
       }
       
-      if (osc->addresses) {
-        OSCAddressesClear(osc);
-        CFAllocatorDeallocate(allocator, osc->addresses);
-      }
-      
       if (osc->servinfo)
         freeaddrinfo(osc->servinfo);
       
@@ -189,6 +280,61 @@ inline OSCRef OSCRelease(OSCRef osc) {
     }
   }
   return osc;
+}
+
+inline struct addrinfo *OSCConnect(OSCRef osc, CFStringRef host, UInt16 port) {
+  osc->servinfo = NULL;
+  osc->sockfd = 0;
+  
+  char hostBuffer[256];
+  char portBuffer[256];
+  
+  CFStringGetCString(host, hostBuffer, sizeof(hostBuffer), kCFStringEncodingUTF8);
+  sprintf(portBuffer, "%i", port);
+  
+//  printf("OSCConnect -> '%s:%s'\n", hostBuffer, portBuffer);
+  
+  memset(&osc->hints, 0, sizeof(osc->hints));
+  osc->hints.ai_family = AF_UNSPEC;
+  osc->hints.ai_socktype = SOCK_DGRAM;
+  
+  if ((osc->rv = getaddrinfo(hostBuffer, portBuffer, &osc->hints, &osc->servinfo)) != 0) {
+    printf("gai_strerror(osc->rv)\n");
+    // TODO: gai_strerror(osc->rv)
+  } else {
+    
+    // Loop through all the results and make a socket
+    for (osc->p = osc->servinfo; osc->p != NULL; osc->p = osc->p->ai_next) {
+      if ((osc->sockfd = socket(osc->p->ai_family, osc->p->ai_socktype, osc->p->ai_protocol)) == -1)
+        continue;
+      break;
+    }
+    
+    if (osc->p == NULL) {
+      printf("failed to bind socket\n");
+    }
+  }
+  return osc->p;
+}
+
+inline void OSCDisconnect(OSCRef osc) {
+  
+}
+
+#pragma mark Addresses
+
+CFArrayRef OSCCreateAddressArray(OSCRef osc) {
+  CFArrayRef array = NULL;
+  if (osc) {
+    if (osc->cache) {
+      CFIndex n = CFDictionaryGetCount(osc->cache);
+      CFTypeRef *keys = CFAllocatorAllocate(osc->allocator, sizeof(CFTypeRef) * n, 0);
+      CFDictionaryGetKeysAndValues(osc->cache, keys, NULL);
+      array = CFArrayCreate(osc->allocator, keys, n, &kCFTypeArrayCallBacks);
+      CFAllocatorDeallocate(osc->allocator, keys);
+    }
+  }
+  return array;
 }
 
 #pragma mark Run Loop Timer
@@ -213,31 +359,6 @@ inline void OSCDeactivateRunLoopTimer(OSCRef osc) {
   }
 }
   
-#pragma mark Addresses
-
-inline bool OSCAddressesIsIndexInBounds(OSCRef osc, CFIndex index) {
-  return index >= 0 && index < osc->addressesIndex;
-}
-
-inline bool OSCAddressesIsIndexOutOfBounds(OSCRef osc, CFIndex index) {
-  return !OSCAddressesIsIndexInBounds(osc, index);
-}
-
-inline CFIndex OSCAddressesAppendWithString(OSCRef osc, CFStringRef string) {
-  __OSCAddress address;
-  address.length = __OSCGet32BitAlignedLength(CFStringGetLength(string) + 1);
-  address.buffer = CFAllocatorAllocate(osc->allocator, address.length, 0);
-  memset(address.buffer, 0, address.length);
-  CFStringGetCString(string, address.buffer, address.length, kCFStringEncodingASCII);
-  osc->addresses[osc->addressesIndex++] = address;
-  return osc->addressesIndex - 1;
-}
-
-inline void OSCAddressesClear(OSCRef osc) {
-  while (--osc->addressesIndex >= 0)
-    CFAllocatorDeallocate(osc->allocator, osc->addresses[osc->addressesIndex].buffer);
-}
-
 #pragma mark Sending
 
 inline OSCResult OSCSetValue(OSCRef osc, CFStringRef name, CFTypeRef value) {
@@ -299,12 +420,37 @@ inline OSCResult OSCSendValue(OSCRef osc, CFStringRef name, CFTypeRef value) {
   return result;
 }
 
+ssize_t sendallto(int s, const void *buf, size_t len,
+               int flags, const struct sockaddr *to,
+               socklen_t tolen) {
+  int total = 0;        // how many bytes we've sent
+  int bytesleft = len; // how many we have left to send
+  int n;
+  
+  while(total < len) {
+    n = sendto(s, buf+total, bytesleft, flags, to, tolen);
+    if (n == -1) { break; }
+    total += n;
+    bytesleft -= n;
+  }
+  
+  len = total; // return number actually sent here
+  
+  return n==-1?-1:0; // return -1 on failure, 0 on success
+} 
+
 inline OSCResult OSCSendRawBuffer(OSCRef osc, const void *buffer, CFIndex length) {
   OSCResult result = kOSCResultNotAllocatedError;
-  if (osc) {
-    if ((result = (OSCResult)sendto(osc->sockfd, buffer, length, 0, osc->p->ai_addr, osc->p->ai_addrlen)) == -1) {
+  if (osc && osc->sockfd && osc->p) {
+    if ((result = (OSCResult)sendallto(osc->sockfd, buffer, length, 0, osc->p->ai_addr, osc->p->ai_addrlen)) == -1) {
+//      if ((result = (OSCResult)sendto(osc->sockfd, buffer, length, 0, osc->p->ai_addr, osc->p->ai_addrlen)) == -1) {
       // TODO: Error
     }
+  } else {
+    printf("failed to send buffer osc=%p", osc);
+    if (osc)
+      printf(", osc->sosckfd=%i, osc->p=%p", osc->sockfd, osc->p);
+    printf("\n");
   }
   return result;
 }
@@ -372,6 +518,10 @@ inline OSCResult OSCSendFloat32(OSCRef osc, CFStringRef name, Float32 value) {
     __OSCBufferAppend(buffer, ",f\0\0", 4, i);
     __OSCBufferAppend(buffer, &swappedValue, 4, i);
     __OSCBufferSend(osc, buffer, i, result);
+    
+//    __OSCBufferPrint(buffer, i);
+    
+    printf("> %f\n", value);
   }
   return result;
 }
